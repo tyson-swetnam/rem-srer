@@ -25,3 +25,6 @@ _This material is based upon work supported by the U.S. Department of Agricultur
 
 _Mention of a proprietary product does not constitute a guarantee or warranty of the products by the U.S. Government or the authors and does not imply its approval to the exclusion of other products that may be suitable._ 
 
+# Data Access
+
+[Click here to view instructions](./data)
