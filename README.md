@@ -1,4 +1,4 @@
-# rem-srer
+# Ecostate Mapping 2019, Santa Rita Experimental Range
 
 Jeffrey K. Gillan<sup>1</sup>*, Guillermo E. Ponce-Campos<sup>1</sup>, Tyson L. Swetnam<sup>2</sup>, Alessandra Gorlier<sup>1</sup>, Philip Heilman<sup>3</sup>, and Mitchel P. McClaran<sup>1</sup>
 
