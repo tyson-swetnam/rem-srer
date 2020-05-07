@@ -1,0 +1,101 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>rem-srer leaflet demo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="./node_modules/leaflet/dist/leaflet.css"/>
+	<script src="./node_modules/leaflet/dist/leaflet.js"></script>
+	<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+	<style>
+            #map { height: 100%; }
+        </style>
+  </head>
+  <body>
+
+  	<div><p><a href="https://data.cyverse.org" target="_blank">back to CyVerse</a></p>
+
+	<div id="map"></div>
+	<script>
+		
+		//Init Overlays
+		var overlays = {};
+
+		//Init BaseMaps
+		var basemaps = {
+		  "OpenStreetMaps": L.tileLayer(
+		    "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+		    {
+		      minZoom: 2,
+		      maxZoom: 19,
+		      id: "osm.streets"
+		    }
+		  ),
+		  "Google-Map": L.tileLayer(
+		    "https://mt1.google.com/vt/lyrs=r&x={x}&y={y}&z={z}",
+		    {
+		      minZoom: 2,
+		      maxZoom: 19,
+		      id: "google.street"
+		    }
+		  ),
+		  "Google-Satellite": L.tileLayer(
+		    "https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}",
+		    {
+		      minZoom: 2,
+		      maxZoom: 19,
+		      id: "google.satellite"
+		    }
+		  ),
+		  "Google-Hybrid": L.tileLayer(
+		    "https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}",
+		    {
+		      minZoom: 2,
+		      maxZoom: 19,
+		      id: "google.hybrid"
+		    }
+		  )
+		};
+
+		//Map Options
+		var mapOptions = {
+		  zoomControl: false,
+		  attributionControl: false,
+		  center: [31.7929434318608, -110.81910972595218],
+		  zoom: 12,
+		  layers: [basemaps.OpenStreetMaps]
+		};
+
+		//Render Main Map
+		var map = L.map("map", mapOptions);
+
+		var marker = L.marker([31.7929434318608, -110.81910972595218]).addTo(map);
+
+		//Init Layer Control
+		var layerControl = L.control.layers(basemaps, overlays).addTo(map);
+
+
+		marker.bindPopup("<b>Hello world!</b><br>I am a popup.").openPopup();
+
+		function addDataToMap(data, map) {
+		    var dataLayer = L.geoJson(data);
+		    dataLayer.addTo(map);
+		}
+
+		$.getJSON("suas-footprints.geojson", function(data) { addDataToMap(data, map); });
+
+		function addDataToMap(data, map) {
+		    var dataLayer = L.geoJson(data, {
+		        onEachFeature: function(feature, layer) {
+		            var popupText = "Plot ID: " + feature.properties.Plot_ID
+		                + "<br>Location: " + feature.properties.place
+		                + "<br><a href='https://usgs.entwine.io/data/view.html?r=%22https://data.cyverse.org/dav-anon/iplant/commons/community_released/aes/srer/suas/2019/ecostate_mapping/ept/may/" + feature.properties.Plot_ID + "%22 '>Potree Visualization (May)</a>"
+		                + "<br><a href='https://usgs.entwine.io/data/view.html?r=%22https://data.cyverse.org/dav-anon/iplant/commons/community_released/aes/srer/suas/2019/ecostate_mapping/ept/sept/" + feature.properties.Plot_ID + "%22 ' target='_blank'>Potree Visualization (September)</a>";
+		            layer.bindPopup(popupText); }
+		        });
+		    dataLayer.addTo(map);
+		}
+
+
+	</script>
+  </body>
+</html>

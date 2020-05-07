@@ -1,0 +1,16 @@
+{
+  "name": "leaflet_map",
+  "version": "0.1.0",
+  "description": "leaflet maps",
+  "scripts": {
+    "serve": "serve ."
+  },
+  "devDependencies": {
+    "serve": "^11.3.0"
+  },
+  "requires": true,
+  "lockfileVersion": 1,
+  "dependencies": {
+    "leaflet": "^1.6.0"
+  }
+}
